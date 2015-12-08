@@ -1,2 +1,14 @@
-<h1>Properties#show</h1>
-<p>Find me in app/views/properties/show.html.erb</p>
+<h1>Property</h1>
+		
+		<div>
+			<p>Street:<%= @property.street %></p>
+			<p>City:<%= @property.city %></p>
+			<p>State:<%= @property.state %></p>
+			<p>Zip:<%= @property.zip %></p><br/>
+		</div>
+			<p>Status:<%= @property.status %></p>
+			<p>Price:<%= @property.price %></p>
+		<div>
+			<%= link_to 'Purchase', property_path(params[:id]) %>
+			<%= link_to 'Edit', edit_property_path(params[:id]) %>
+		</div>

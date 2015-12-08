@@ -1,2 +1,21 @@
-<h1>Properties#index</h1>
-<p>Find me in app/views/properties/index.html.erb</p>
+<h1>Properties</h1>
+
+
+<% if @properties.any? %>
+	<% @properties.each do |p| %>
+		
+		<div>
+			<p><%= p.street %></p>
+			<p><%= p.city %></p>
+			<p><%= p.state %></p>
+			<p><%= p.zip %></p><br/>
+		</div>
+		<div>
+			<p><%= p.price %></p>
+			<%= link_to 'Purchase', property_path(p.id) %>
+		</div>
+		<% end %>
+<%else %>
+	<p>There are no properties</p>
+<%end%>
+	<%=link_to 'add property', new_property_path %>

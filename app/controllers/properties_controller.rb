@@ -1,6 +1,6 @@
 class PropertiesController < ApplicationController
-  before_aciton :find_property, only: [:show, :edit, :update, :destroy]
-  before_aciton :find_user, only: [:create, :new]
+  before_action :find_property, only: [:show, :edit, :update, :destroy]
+  before_action :find_user, only: [:create, :new]
   def index
   	@properties = Property.all
   end
@@ -12,11 +12,12 @@ class PropertiesController < ApplicationController
   def new
   	@property =Property.new
   end
+  
   def create
   	@property =Property.new(property_params)
-  	@user << @property
-  	if @user.save
-  		redirect_to user_property(@property.id)
+  	@property.user_id = @user.id
+  	if @property.save
+  		redirect_to property_path(@property.id)
   	else
   		render :new
   	end
@@ -27,7 +28,11 @@ class PropertiesController < ApplicationController
   end
 
   def update
-  	
+    if @property.update(property_params)
+      redirect_to property_path(@property)
+    else
+      render :new
+    end
   end
 
   private
@@ -37,7 +42,7 @@ class PropertiesController < ApplicationController
   	end
 
   	def find_user
-  		@user =User.find(params[:user_id])
+  		@user =User.find(current_user)
   	end
 
   	def find_property
