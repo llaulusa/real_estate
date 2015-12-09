@@ -1,3 +1,5 @@
 <%= link_to 'Logout', destroy_user_session_path, method: :delete %>
 <h2>Welcome <%= current_user.name %> </h2>
 <%= button_to 'See Properties', properties_path, method: :get %>
+<%= button_to "See #{current_user.name}'s  Properties", person_show_path(current_user.id), method: :get %>
+

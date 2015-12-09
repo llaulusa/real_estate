@@ -1,10 +1,18 @@
 Rails.application.routes.draw do
+  get 'person/index', :to => 'person#index'
+
+  get 'person/show/:id', :to => 'person#show', as: "person_show"
+
+ 
+
   devise_for :users, controllers: { registrations: 'registrations'}
 
   # resources :users do
     resources :properties
+
+    put 'properties/sell/:id', :to => 'properties#sell', :as => 'sell'
     
-  
+    
   
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

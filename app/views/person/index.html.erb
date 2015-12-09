@@ -1,0 +1,14 @@
+
+<% @persons.each do |p| %>
+
+		
+		<div>
+	
+			<%= link_to p.name, person_show_path(p.id) %>
+
+		</div>
+
+<% end %>
+
+
+

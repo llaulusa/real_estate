@@ -1,14 +1,16 @@
 <h1>Property</h1>
 		
 		<div>
-			<p>Street:<%= @property.street %></p>
-			<p>City:<%= @property.city %></p>
-			<p>State:<%= @property.state %></p>
-			<p>Zip:<%= @property.zip %></p><br/>
+			<p>Street:  <%= @property.street %></p>
+			<p>City:  <%= @property.city %></p>
+			<p>State:  <%= @property.state %></p>
+			<p>Zip:  <%= @property.zip %></p><br/>
 		</div>
-			<p>Status:<%= @property.status %></p>
-			<p>Price:<%= @property.price %></p>
+			<p>Status:  <%= @property.status == 1 ? 'For Sale' : 'Sold' %></p>
+			<p>Price:  <%= @property.price %></p>
 		<div>
-			<%= link_to 'Purchase', property_path(params[:id]) %>
+			<%= link_to 'Purchase', sell_path(params[:id]), method: :put %>
 			<%= link_to 'Edit', edit_property_path(params[:id]) %>
+			<%= link_to 'Delete', property_path(params[:id]), method: :delete %>
 		</div>
+		<%= link_to 'Properties', properties_path %>
