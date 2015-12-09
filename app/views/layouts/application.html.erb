@@ -7,6 +7,20 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
+<div class='navbar'>
+
+
+<nav>
+    <div class="nav-wrapper">
+<ul>
+        <li>welcome <%= current_user.name %></li>
+        <li><%= link_to 'edit', edit_user_registration_path %></li>
+     
+      </ul>
+    </div>
+  </nav>
+
+</div>
 
 <p class="notice"><%= notice %></p>
 <p class="alert"><%= alert %></p>
