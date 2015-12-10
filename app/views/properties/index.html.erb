@@ -3,17 +3,20 @@
 
 <% if @properties.any? %>
 	<% @properties.each do |p| %>
-		
-		<div>
-			<p><%= p.street %></p>
-			<p><%= p.city %></p>
-			<p><%= p.state %></p>
-			<p><%= p.zip %></p><br/>
+
+		<div class="row">
+      <div class="col offset-s1 s3">
+			<p><%= p.street %>,
+			<%= p.city %>,
+			<%= p.state %>
+			<%= p.zip %></p>
+      <p>Status:  <%= p.status == 1 ? 'For Sale' : 'Sold' %></p>
+			<p>Price: <%= p.price %></p>
+			<%= link_to 'Property Info', property_path(p.id) %>
+      <hr />
+      </div>
 		</div>
-		<div>
-			<p><%= p.price %></p>
-			<%= link_to 'Purchase', property_path(p.id) %>
-		</div>
+
 		<% end %>
 <%else %>
 	<p>There are no properties</p>

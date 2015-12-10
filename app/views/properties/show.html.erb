@@ -1,5 +1,5 @@
 <h1>Property</h1>
-		
+
 		<div>
 			<p>Street:  <%= @property.street %></p>
 			<p>City:  <%= @property.city %></p>
@@ -9,8 +9,13 @@
 			<p>Status:  <%= @property.status == 1 ? 'For Sale' : 'Sold' %></p>
 			<p>Price:  <%= @property.price %></p>
 		<div>
-			<%= link_to 'Purchase', sell_path(params[:id]), method: :put %>
-			<%= link_to 'Edit', edit_property_path(params[:id]) %>
-			<%= link_to 'Delete', property_path(params[:id]), method: :delete %>
+      <% if current_user.id == @property.user_id %>
+  			<%= link_to 'Edit', edit_property_path(params[:id]) %>
+  			<%= link_to 'Delete', property_path(params[:id]), method: :delete %>
+      <% elsif @property.status == 1 %>
+			   <%= link_to 'Purchase', sell_path(params[:id]), method: :put %>
+      <% else %>
+          <%= @property.buyer_name %>
+      <% end %>
 		</div>
 		<%= link_to 'Properties', properties_path %>

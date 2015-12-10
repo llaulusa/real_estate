@@ -2,19 +2,22 @@ class PropertiesController < ApplicationController
   before_action :find_property, only: [:show, :edit, :update, :destroy, :sell]
   before_action :find_user, only: [:create, :new]
   def index
-  	@properties = Property.all
+  	@properties = Property.all.sort_by do |property|
+      property[:status]
+    end
   end
 
-  def show 
-  	
+
+  def show
+
   end
 
   def new
-  	@property =Property.new
+  	@property = Property.new
   end
-  
+
   def create
-  	@property =Property.new(property_params)
+  	@property = Property.new(property_params)
   	@property.user_id = @user.id
   	if @property.save
   		redirect_to property_path(@property.id)
@@ -40,7 +43,7 @@ class PropertiesController < ApplicationController
     redirect_to properties_path
   end
 
-  def sell 
+  def sell
     # TODO better way to do this
     if @property.update(sell_property)
       redirect_to property_path(@property.id)
@@ -52,10 +55,10 @@ class PropertiesController < ApplicationController
   private
   	def property_params
   		params.require(:property).permit(:price, :street, :city, :state, :zip, :status, :buyer_id)
-  		
+
   	end
     def sell_property
-      {status:2, buyer_id: @property.buyer_id}
+      {status:2, buyer_id: current_user.id  }
     end
 
   	def find_user
