@@ -1,24 +1,57 @@
-<h1>Properties</h1>
+<div class="container">
+  <h1 class="center-align">Properties</h1>
 
 
-<% if @properties.any? %>
-	<% @properties.each do |p| %>
-
-		<div class="row">
-      <div class="col offset-s1 s3">
-			<p><%= p.street %>,
-			<%= p.city %>,
-			<%= p.state %>
-			<%= p.zip %></p>
-      <p>Status:  <%= p.status == 1 ? 'For Sale' : 'Sold' %></p>
-			<p>Price: <%= p.price %></p>
-			<%= link_to 'Property Info', property_path(p.id) %>
-      <hr />
+  <div class="row">
+    <h3 class="col offset-s1 s11">For Sale</h3>
+  <% if @properties_for_sale.any? %>
+  	<% @properties_for_sale.each do |p| %>
+    <div class="col  m4 s12 ">
+      <div>
+        <div class="card-panel hoverable">
+    			<p>
+            <%= p.street %><br />
+            <%= p.city %>,
+      			<%= p.state %><br />
+      			<%= p.zip %>
+          </p>
+  			  <p>Price: <%= p.price %></p>
+          <div class="center-align">
+    			     <%= link_to 'Info', property_path(p.id), class: 'btn' %>
+          </div>
+        </div>
       </div>
-		</div>
+    </div>
 
-		<% end %>
-<%else %>
-	<p>There are no properties</p>
-<%end%>
-	<%=link_to 'add property', new_property_path %>
+  		<% end %>
+  <%else %>
+  	<p>There are no properties for sale</p>
+  <%end%>
+  </div>
+  <div class="row">
+    <h3 class="col offset-s1 s11 ">Sold</h3>
+  <% if @properties_sold.any? %>
+    <% @properties_sold.each do |p| %>
+      <div class="col  m4 s12">
+        <div>
+          <div class="blue lighten-4 card-panel hoverable ">
+            <p>
+              <%= p.street %><br />
+              <%= p.city %>,
+              <%= p.state %><br />
+              <%= p.zip %>
+            </p>
+            <p>Price: $<%= p.price %> </p>
+            <div class="center-align">
+                 <%= link_to 'Info', property_path(p.id), class: 'btn' %>
+            </div>
+          </div>
+        </div>
+      </div>
+      <% end %>
+  <%else %>
+    <p>There are no properties already sold</p>
+  <%end%>
+  </div>
+  	<%=link_to 'add property', new_property_path %>
+</div>

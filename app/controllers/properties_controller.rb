@@ -2,14 +2,11 @@ class PropertiesController < ApplicationController
   before_action :find_property, only: [:show, :edit, :update, :destroy, :sell]
   before_action :find_user, only: [:create, :new]
   def index
-  	@properties = Property.all.sort_by do |property|
-      property[:status]
-    end
+    @properties_for_sale = Property.where(status: 1)
+  	@properties_sold = Property.where(status: 2)
   end
 
-
   def show
-
   end
 
   def new

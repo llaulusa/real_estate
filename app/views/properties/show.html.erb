@@ -1,21 +1,27 @@
-<h1>Property</h1>
 
-		<div>
-			<p>Street:  <%= @property.street %></p>
-			<p>City:  <%= @property.city %></p>
-			<p>State:  <%= @property.state %></p>
-			<p>Zip:  <%= @property.zip %></p><br/>
-		</div>
-			<p>Status:  <%= @property.status == 1 ? 'For Sale' : 'Sold' %></p>
-			<p>Price:  <%= @property.price %></p>
-		<div>
-      <% if current_user.id == @property.user_id %>
-  			<%= link_to 'Edit', edit_property_path(params[:id]) %>
-  			<%= link_to 'Delete', property_path(params[:id]), method: :delete %>
-      <% elsif @property.status == 1 %>
-			   <%= link_to 'Purchase', sell_path(params[:id]), method: :put %>
-      <% else %>
+  <div class="row v-align-wrapper">
+    <div class="col s12 m6">
+        <img src="http://i2.wp.com/farm4.static.flickr.com/3030/2593081909_68f1ed92c1.jpg?resize=500%2C333" alt="Kool House" class="responsive-img col s12" />
+    </div>
+      <div class="col s12 m6">
+        <p>
+          <%= @property.street %><br />
+          <%= @property.city %>,
+          <%= @property.state %><br />
+          <%= @property.zip %>
+        </p>
+        <p>Status:  <%= @property.status == 1 ? 'For Sale' : 'Sold' %></p>
+        <p>Price:  <%= @property.price %></p>
+          <% if current_user.id == @property.user_id %>
+          <%= link_to 'Edit', edit_property_path(params[:id]), class: 'btn' %>
+          <%= link_to 'Delete', property_path(params[:id]), method: :delete, class: 'btn' %>
+          <% elsif @property.status == 1 %>
+          <%= link_to 'Purchase', sell_path(params[:id]), method: :put, class: 'btn'%>
+          <% else %>
           <%= @property.buyer_name %>
-      <% end %>
-		</div>
-		<%= link_to 'Properties', properties_path %>
+          <% end %>
+      </div>
+  </div>
+  <div>
+    <%= link_to 'Properties', properties_path, class: 'btn col offset-m1' %>
+  </div>

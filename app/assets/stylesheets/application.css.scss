@@ -13,8 +13,8 @@
  *= require_tree .
  *= require_self
  */
+@import 'materialize/components/color';
+$primary-color: color("blue", "darken-4") !default;
+$secondary-color: color("blue", "lighten-3") !default;
 @import 'materialize';
-
-.nav-wrapper{
-	background-color:crimson;
-}
+@import 'properties';
